@@ -31,7 +31,13 @@ COMMIT
 # Completed on Sat Nov  7 15:11:33 2015
 EOT
 
-SERVER=${1:-se15.nordvpn.com.udp.ovpn}
+SERVER=${SERVER:-se15.nordvpn.com.udp.ovpn}
 
-/usr/sbin/openvpn /etc/vpn/${SERVER}
+
+/usr/sbin/openvpn --daemon --writepid /var/run/openvpn --config $(ls -1 /etc/vpn/${SERVER}* | shuf -n 1)
+
+while sleep 10
+do
+ip link show dev tun0 || (kill $(cat /var/run/openvpn || true) ;   /usr/sbin/openvpn --daemon --writepid /var/run/openvpn --config $(ls -1 /etc/vpn/${SERVER}* | shuf -n 1))
+done
 
