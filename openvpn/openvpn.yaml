@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: openvpn
+spec:
+  dnsPolicy: None
+  dnsConfig:
+    nameservers:
+    - 103.86.96.100
+    - 103.86.99.100
+    - 1.1.1.1
+  containers:
+  - image: k8s.io/demo/openvpn
+#    command: 
+#    - sleep
+#    args:
+#      - 1d
+    imagePullPolicy: Never
+    name: openvpn
+    volumeMounts:
+    - mountPath: /etc/vpn
+      name: passwd
+    - mountPath: /dev/net/tun
+      name: tun
+    - mountPath: /etc/iptables
+      name: iptables
+    securityContext:
+      capabilities:
+        add:
+        - NET_ADMIN
+  volumes:
+  - name: passwd
+    secret:
+      secretName: nordvpn
+  - name: tun
+    hostPath:
+       path: /dev/net/tun
+       type: CharDevice
+  - name: iptables
+    configMap: 
+      name: iptables
+    
