@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 iptables-restore < /etc/iptables/iptables.conf
 

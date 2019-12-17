@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
-RUN apt-get update && apt-get install -y iptables openvpn curl jq mtr
+FROM alpine:3.10
+RUN apk add --update --no-cache openvpn curl mtr jq 
 COPY run.sh /
 ENTRYPOINT ["/run.sh"] 

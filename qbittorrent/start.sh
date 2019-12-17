@@ -1,3 +1,5 @@
 #!/bin/bash
 
-docker run -d --network=container:openvpn --name=qbittorrent -v /media/space/incoming/qBittorrent:/incoming/qbittorrent/.config/qBittorrent qbittorrent
+LOCAL=${1}
+
+docker run -d --network=container:openvpn-${LOCAL} --name=qbittorrent -v /media/space/incoming/qBittorrent:/incoming/qbittorrent/.config/qBittorrent qbittorrent
