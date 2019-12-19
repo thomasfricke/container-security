@@ -9,9 +9,16 @@ docker rm brave-${NAME}
 #
 # does not need to run privileged but unconfined
 #
-docker run -d  --privileged --memory=12000m --memory-swap=16g --network=container:openvpn-${VPN}  \
-    --name=brave-${NAME} -e DISPLAY=${DISPLAY}  --device=/dev/dri:/dev/dri \
+docker run -d  \
+    --privileged \
+    --ipc=private \
+    --network=container:openvpn-${VPN}  \
+    --name=brave-${NAME} \
+    -e DISPLAY=${DISPLAY} \
+    -e HOMEPAGE="https://whatismyip.com" \
+    --device=/dev/dri:/dev/dri \
     -v /home/thomas/import/docker:/home/brave/Downloads \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /dev/shm:/dev/shm \
     brave:latest
     

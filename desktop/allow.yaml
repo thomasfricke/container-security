@@ -1,0 +1,42 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: allow
+  namespace: desktop
+spec:
+  hosts:
+  - heise.de 
+  - www.heise.de
+  - heise.cloudimg.io
+  - spiegel.de
+  - www.spiegel.de
+  - cdn1.spiegel.de
+  - blog.fefe.de
+  - www.mozilla.org
+  - octarinesec.com
+  - www.octarinesec.com
+  - demo.octarinesec.com
+  - kubernetes.io
+  - "*.cloudfront.net"
+  - youtube.com
+  - www.youtube.com
+  - "*.googlevideo.com"
+  - "*.cloudflare.com"
+  - www.googletagmanager.com
+  - docs.google.com
+  - fonts.gstatic.com
+  - www.gstatic.com
+  - accounts.google.com 
+  - play.google.com
+  - "*.googleusercontent.com"
+  - endocode.com
+  - www.endocode.com
+  ports:
+  - number: 80
+    name: http
+    protocol: HTTP
+  - number: 443
+    name: https
+    protocol: HTTPS
+  resolution: NONE
+  location: MESH_EXTERNAL

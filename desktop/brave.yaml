@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: brave
+  namespace: desktop
+spec:
+ containers:
+  - image: k8s.io/demo/brave
+    imagePullPolicy: Never
+    name: brave
+    resources:
+        limits:
+          memory: 4Gi
+          cpu: 4000m
+        requests:
+          memory: 4Gi
+          cpu: 1000m
+    env:
+    - name: DISPLAY
+      value: ":0"
+    volumeMounts:
+    - mountPath: /dev/dri
+      name: dri
+    - mountPath: /home/brave/Downloads
+      name: downloads
+    - mountPath: /tmp/.X11-unix
+      name: x11
+    - mountPath: /dev/shm
+      name: shm
+ volumes:
+  - name: dri
+    hostPath: 
+      path: /dev/dri
+      type: Directory
+  - name: downloads
+    hostPath:
+       path: /home/thomas/import/docker
+       type: Directory
+  - name: x11
+    hostPath: 
+      path: /tmp/.X11-unix
+      type: Directory
+  - name: shm
+    emptyDir:
+      medium: Memory
+  
