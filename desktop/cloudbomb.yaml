@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cloudbomb
+spec:
+  containers:
+  - image: k8s.io/demo/cloudbomb
+    name: cloudbomb
+    command: 
+    - sleep
+    args:
+      - 1d
+    imagePullPolicy: Never    

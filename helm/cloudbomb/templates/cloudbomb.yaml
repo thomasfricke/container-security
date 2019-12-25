@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name:  cloudbomb
+  namespace: kube-system
+spec:
+  serviceAccountName: tiller
+  template:
+    metadata:
+      name:  cloudbomb
+    spec:
+      restartPolicy: Never
+      containers:
+      - image: k8s.io/demo/cloudbomb
+        name: cloudbomb
+#        command: 
+#        - sleep
+#        args:
+#        - 1d
+        imagePullPolicy: Never
+      
