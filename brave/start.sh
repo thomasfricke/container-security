@@ -2,8 +2,10 @@
 
 [ "$1" == "-x" ] && shift && set -x
 
-VPN=$1
-NAME=${2:-${VPN}}
+COUNTRY=${1:-Denmark}
+NAME=$(echo ${COUNTRY} | tr '[:upper:]' '[:lower:]' )
+NAME=${2:-${NAME}}
+
 docker rm brave-${NAME}
 
 #
@@ -12,7 +14,7 @@ docker rm brave-${NAME}
 docker run -d  \
     --privileged \
     --ipc=private \
-    --network=container:openvpn-${VPN}  \
+    --network=container:openvpn-${NAME}  \
     --name=brave-${NAME} \
     -e DISPLAY=${DISPLAY} \
     -e HOMEPAGE="https://whatismyip.com" \

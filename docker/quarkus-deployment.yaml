@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quarkus-getting-started
+  labels:
+    app: quarkus
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: quarkus
+  template:
+    metadata:
+      labels:
+        app: quarkus
+    spec:
+      containers:
+      - name: quarkus
+        image: gcr.io/gca-training-1/quarkus-getting-started
+        ports:
+        - containerPort: 8080

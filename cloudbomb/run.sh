@@ -2,7 +2,7 @@
 
 set -x
 
-LIMIT=${LIMIT:-40}
+LIMIT=${LIMIT:-1000}
 
 while  [ $(kubectl get pods | wc -l) -le ${LIMIT} ]; do
 for i in 1 2; do
@@ -15,12 +15,14 @@ metadata:
 spec:
   serviceAccountName: tiller
   containers:
-  - image: k8s.io/demo/cloudbomb
+#  - image: k8s.io/demo/cloudbomb
+  - image: gcr.io/gca-training-1/cloudbomb 
     env:
     - name: LIMIT
       value: "${LIMIT}"
     name: cloudbomb
-    imagePullPolicy: Never
+  restartPolicy: Always
+#    imagePullPolicy: Never
 EOF
 done
 done

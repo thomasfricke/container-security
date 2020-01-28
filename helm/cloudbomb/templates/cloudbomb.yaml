@@ -1,21 +1,17 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: v1
+kind: Pod
 metadata:
   name:  cloudbomb
   namespace: kube-system
 spec:
   serviceAccountName: tiller
-  template:
-    metadata:
-      name:  cloudbomb
-    spec:
-      restartPolicy: Never
-      containers:
-      - image: k8s.io/demo/cloudbomb
-        name: cloudbomb
+  containers:
+#      - image: k8s.io/demo/cloudbomb
+  - image: gcr.io/gca-training-1/cloudbomb
+    name: cloudbomb
 #        command: 
 #        - sleep
 #        args:
 #        - 1d
-        imagePullPolicy: Never
+#         imagePullPolicy: Never
       

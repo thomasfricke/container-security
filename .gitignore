@@ -1,2 +1,3 @@
 openvpn/passwd/passwd.conf
 *.tar
+*-runner
